@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="radioApp" ng-controller="scheduleCtrl">
+	<head>
+		<meta charset="utf-8">
+		<title> radioCtrl {{ver}} </title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/scheduleCtrl.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body>
+
+		<div id="wrapper">
+		<h2>radioCtrl {{ver}}</h2>
+		<nav id="nav">
+               <ul id="navigation">
+                    <li><a href="index.html">Schedule</a></li>
+                    <li><a href="stream.html">Stream</a></li>
+                    <li><a href="tune.html">Tune</a></li>
+            </ul>
+        </nav>	
+    	</div>
+    	<br />
+    	<div id="content" class="table-responsive">
+    		<table class="table table-striped table-bordered table-condensed">
+    			<tr>
+    				<th>ID</th>
+    				<th>Title</th>
+    				<th>Starting time</th>
+    				<th>Ending time</th>
+    				<th>Duration (seconds)</th>
+    				<th>Frequency (MHz)	</th>
+    				<th>Format</th>
+    				<th>Tuner ID</th>
+    			</tr>
+  				<tr ng-repeat="sch in sched track by sch.id">
+  					<td>{{ sch.id }}</td>
+    				<td>{{ sch.title }}</td>
+    				<td>{{ sch.date_start}}</td>
+    				<td>{{ sch.date_end }}</td>
+    				<td>{{ sch.duration }}</td>
+    				<td>{{ sch.frequency}}</td>
+    				<td>{{ sch.format }}</td>
+    				<td>{{ sch.tunerID }}</td>
+  				</tr>
+			</table>
+		</div>
+		<div id="addSched">
+			<br/>
+			<form>
+				<h3>Schedule a recording</h3>
+				<div class="form-group">
+					<label for="title">Title:</label> 
+					<input type="text" size="60" ng-model="input.title" required/> <br/>
+				</div>
+
+				<div class="form-group">
+					<label for="date_start">Starting time: </label> 
+					<input type="datetime-local" ng-model="input.date_start" required/><br/>
+				</div>
+
+				<div class="form-group">
+					<label for="duration">Duration</label>  
+					<input type="number" ng-model="input.hours" step="1" style="width:10%;" required/>h:
+					<input type="number" ng-model="input.minutes" step="1" style="width:10%;" required/>m:
+					<input type="number" ng-model="input.seconds" step="1" style="width:10%;" required/>s
+					<br/>
+				</div>
+
+				<div class="form-group">
+					<label for="frequency">Frequency</label>  
+					<input type="number" step="0.1" min="76.0" max="107.9" ng-model="input.frequency" required/><br/>
+				</div>
+
+				<div class="form-group">
+					<label for="format">Format: </label>
+					<input type="text" ng-model="input.format" required/><br/>
+				</div>
+
+				<div class="form-group">
+					<label for="tunerID">Tuner ID: </label>
+					<input type="number" ng-model="input.tunerID" required/><br/>
+				</div>
+
+				<div class="form-group">
+					<input type="submit" ng-click="submit(input)" value="Save" /><br/>
+				</div>
+
+
+			</form>
+    	</div>
+    <h6 class="author">Built by emilio2601. Powered by AngularJS. Licensed under the <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"> GNU GPL v2</h6>
+	</body>
+</html>
